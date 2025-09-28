@@ -3,7 +3,7 @@ import sqlite3
 
 app = Flask(__name__)
 
-# تابع ساخت جدول اگر وجود نداشت
+# ساخت جدول اگر وجود نداشت
 def init_db():
     conn = sqlite3.connect('data.db')
     c = conn.cursor()
@@ -17,7 +17,7 @@ def home():
 
 @app.route('/pages', methods=['GET', 'POST'])
 def manage_pages():
-    init_db()  # قبل از هر کاری مطمئن شو جدول هست
+    init_db()  # ساخت جدول قبل از هر کاری
     conn = sqlite3.connect('data.db')
     c = conn.cursor()
 
@@ -32,7 +32,7 @@ def manage_pages():
         conn.close()
         return jsonify({"message": "User created successfully", "username": username}), 201
 
-    # برای متد GET
+    # متد GET
     c.execute('SELECT * FROM pages')
     data = c.fetchall()
     conn.close()
