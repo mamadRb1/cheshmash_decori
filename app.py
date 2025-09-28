@@ -3,13 +3,12 @@ import sqlite3
 
 app = Flask(__name__)
 
-# ساخت جدول اگر وجود نداشت
-def init_db():
-    conn = sqlite3.connect('data.db')
-    c = conn.cursor()
-    c.execute('CREATE TABLE IF NOT EXISTS pages (id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT)')
-    conn.commit()
-    conn.close()
+# ساخت جدول در شروع برنامه
+conn = sqlite3.connect('data.db')
+c = conn.cursor()
+c.execute('CREATE TABLE IF NOT EXISTS pages (id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT)')
+conn.commit()
+conn.close()
 
 @app.route('/')
 def home():
@@ -17,16 +16,14 @@ def home():
 
 @app.route('/pages', methods=['GET', 'POST'])
 def manage_pages():
-    init_db()  # ساخت جدول قبل از هر کاری
     conn = sqlite3.connect('data.db')
     c = conn.cursor()
-
     if request.method == 'POST':
-        data = request.get_json()
-        if not data or 'username' not in data:
+        # دریافت امن مقدار username
+        username = request.json.get('username')
+        if not username:  # اعتبارسنجی وجود username
             conn.close()
             return jsonify({"error": "Username is required"}), 400
-        username = data['username']
         c.execute('INSERT INTO pages (username) VALUES (?)', (username,))
         conn.commit()
         conn.close()
