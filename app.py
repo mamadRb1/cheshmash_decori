@@ -1,6 +1,7 @@
-from flask import Flask, render_template, send_from_directory, jsonify
 import os
+import datetime
 import sqlite3
+from flask import Flask, render_template, Response
 
 app = Flask(__name__)
 
@@ -9,7 +10,7 @@ app = Flask(__name__)
 def home():
     return render_template('index.html')
 
-# مسیر برای گرفتن لیست صفحات (مدیریت صفحات فروشگاه)
+# گرفتن لیست صفحات فروشگاه از دیتابیس
 @app.route('/pages', methods=['GET'])
 def manage_pages():
     conn = sqlite3.connect('data.db')
@@ -17,12 +18,44 @@ def manage_pages():
     c.execute('SELECT * FROM pages')
     rows = c.fetchall()
     conn.close()
-    return jsonify(rows)
+    return {'pages': rows}
 
-# سرو کردن sitemap.xml از روت دامنه
+# سایت‌مپ داینامیک
 @app.route('/sitemap.xml')
 def sitemap():
-    return send_from_directory(os.path.join(app.root_path, 'static'), 'sitemap.xml')
+    # صفحات ثابت
+    static_pages = [
+        {'loc': '/', 'priority': '1.0'},
+        {'loc': '/shop', 'priority': '0.8'},
+        {'loc': '/about', 'priority': '0.6'},
+        {'loc': '/contact', 'priority': '0.6'}
+    ]
 
-if __name__ == '__main__':
+    # محصولات/صفحات از دیتابیس
+    conn = sqlite3.connect('data.db')
+    c = conn.cursor()
+    c.execute('SELECT slug FROM pages')  # فرض: جدول pages ستون slug دارد
+    product_rows = c.fetchall()
+    conn.close()
+
+    products = [{'loc': f'/product/{slug}', 'priority': '0.7'} for (slug,) in product_rows]
+
+    pages = static_pages + products
+    today = datetime.date.today().isoformat()
+
+    xml = ['<?xml version="1.0" encoding="UTF-8"?>']
+    xml.append('<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">')
+
+    for page in pages:
+        xml.append('  <url>')
+        xml.append(f'    <loc>https://cheshmashdecori.ir{page["loc"]}</loc>')
+        xml.append(f'    <lastmod>{today}</lastmod>')
+        xml.append(f'    <priority>{page["priority"]}</priority>')
+        xml.append('  </url>')
+
+    xml.append('</urlset>')
+
+    return Response('\n'.join(xml), mimetype='application/xml')
+
+if __name__ == "__main__":
     app.run()
