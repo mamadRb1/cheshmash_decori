@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 import sqlite3
 
 app = Flask(__name__)
@@ -6,69 +6,40 @@ app = Flask(__name__)
 # ساخت جدول اگر وجود ندارد
 conn = sqlite3.connect('data.db')
 c = conn.cursor()
-c.execute('CREATE TABLE IF NOT EXISTS pages (id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT NOT NULL)')
+c.execute('CREATE TABLE IF NOT EXISTS pages (id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, content TEXT)')
 conn.commit()
 conn.close()
 
+# صفحه اصلی سایت (PWA)
 @app.route('/')
 def home():
-    return "چشماش‌دکوری پنل فعال است"
+    return render_template('index.html')
 
-@app.route('/pages', methods=['GET', 'POST'])
+# مدیریت صفحات (GET برای گرفتن لیست صفحات)
+@app.route('/pages', methods=['GET'])
 def manage_pages():
     conn = sqlite3.connect('data.db')
     c = conn.cursor()
-
-    if request.method == 'POST':
-        username = request.json.get('username')
-        if not username:
-            conn.close()
-            return jsonify({"error": "Username is required"}), 400
-        c.execute('INSERT INTO pages (username) VALUES (?)', (username,))
-        conn.commit()
-        conn.close()
-        return jsonify({"message": "User created successfully", "username": username}), 201
-
-    # GET
-    c.execute('SELECT id, username FROM pages')
-    data = [{"id": row[0], "username": row[1]} for row in c.fetchall()]
+    c.execute('SELECT * FROM pages')
+    rows = c.fetchall()
     conn.close()
-    return jsonify(data), 200
+    return jsonify(rows)
 
-@app.route('/pages/<int:page_id>', methods=['PUT'])
-def update_page(page_id):
+# اضافه کردن صفحه جدید (POST)
+@app.route('/pages', methods=['POST'])
+def add_page():
+    data = request.get_json()
+    title = data.get('title')
+    content = data.get('content')
+    
     conn = sqlite3.connect('data.db')
     c = conn.cursor()
-    username = request.json.get('username')
-    if not username:
-        conn.close()
-        return jsonify({"error": "Username is required"}), 400
-
-    # چک کن ببین رکورد وجود دارد یا نه
-    c.execute('SELECT id FROM pages WHERE id=?', (page_id,))
-    if not c.fetchone():
-        conn.close()
-        return jsonify({"error": "Record not found"}), 404
-
-    c.execute('UPDATE pages SET username=? WHERE id=?', (username, page_id))
+    c.execute('INSERT INTO pages (title, content) VALUES (?, ?)', (title, content))
     conn.commit()
     conn.close()
-    return jsonify({"message": "User updated successfully", "id": page_id, "username": username}), 200
+    
+    return jsonify({"message": "صفحه با موفقیت اضافه شد!"})
 
-@app.route('/pages/<int:page_id>', methods=['DELETE'])
-def delete_page(page_id):
-    conn = sqlite3.connect('data.db')
-    c = conn.cursor()
-
-    c.execute('SELECT id FROM pages WHERE id=?', (page_id,))
-    if not c.fetchone():
-        conn.close()
-        return jsonify({"error": "Record not found"}), 404
-
-    c.execute('DELETE FROM pages WHERE id=?', (page_id,))
-    conn.commit()
-    conn.close()
-    return jsonify({"message": "User deleted successfully", "id": page_id}), 200
-
+# اجرای سرور لوکال (برای تست)
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
+    app.run(debug=True)
