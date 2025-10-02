@@ -1,4 +1,4 @@
-from flask import Flask, render_template, send_from_directory
+from flask import Flask, render_template, send_from_directory, redirect
 
 app = Flask(__name__)
 
@@ -6,6 +6,11 @@ app = Flask(__name__)
 @app.route('/')
 def home():
     return render_template('index.html')
+
+# مسیر /c → ریدایرکت به صفحه اصلی
+@app.route('/c')
+def redirect_c():
+    return redirect('/', code=302)
 
 # مسیر سرو کردن sitemap.xml
 @app.route('/sitemap.xml')
