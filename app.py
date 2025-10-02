@@ -11,10 +11,10 @@ def home():
 @app.route('/sitemap.xml')
 def sitemap():
     static_pages = [
-        {'loc': '/',       'priority': '1.0'},
-        {'loc': '/shop',   'priority': '0.8'},
-        {'loc': '/about',  'priority': '0.6'},
-        {'loc': '/contact','priority': '0.6'},
+        {'loc': '/', 'priority': '1.0'},
+        {'loc': '/shop', 'priority': '0.8'},
+        {'loc': '/about', 'priority': '0.6'},
+        {'loc': '/contact', 'priority': '0.6'},
     ]
     today = datetime.date.today().isoformat()
 
@@ -22,14 +22,12 @@ def sitemap():
         '<?xml version="1.0" encoding="UTF-8"?>',
         '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'
     ]
-
     for page in static_pages:
         xml_parts.append(
-            f"<url><loc>https://cheshmashdecori.ir{page['loc']}</loc>"
+            f"<url><loc>https://chesmashdecori.ir{page['loc']}</loc>"
             f"<lastmod>{today}</lastmod>"
             f"<priority>{page['priority']}</priority></url>"
         )
-
     xml_parts.append('</urlset>')
     xml_str = "\n".join(xml_parts)
     return Response(xml_str, mimetype='application/xml')
@@ -56,4 +54,4 @@ def debug_db():
         return {"error": str(e)}
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=5000, debug=True)
