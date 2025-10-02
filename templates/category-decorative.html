@@ -1,21 +1,71 @@
 <!DOCTYPE html>
 <html lang="fa">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>لوازم تزئینی دکوراسیون | فروشگاه چشماش دکوری</title>
-    <meta name="description" content="خرید انواع لوازم تزئینی و دکوراسیون داخلی مدرن، اکسسوری های خانه و اتاق با قیمت ارزان و کیفیت عالی.">
-    <meta name="keywords" content="لوازم تزئینی دکوراسیون, خرید دکور شیک منزل, اکسسوری خانه و اتاق, دکوراسیون داخلی مدرن, دکوری ارزان و زیبا">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>لوازم دکوری | خرید محصولات تزئینی لوکس و هنری</title>
+<meta name="description" content="انواع لوازم دکوری شامل تابلو، مجسمه، گلدان و وسایل تزئینی منزل، با ترکیب رنگ طلایی و بنفش و طراحی لاکچری.">
+<meta name="keywords" content="لوازم دکوری, خرید وسایل تزئینی, محصولات هنری منزل, دکوراسیون لوکس, فروشگاه دکوری شیک">
+<!-- Schema Breadcrumb -->
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"BreadcrumbList",
+  "itemListElement":[
+    {"@type":"ListItem","position":1,"name":"صفحه اصلی","item":"https://cheshmashdecori.ir"},
+    {"@type":"ListItem","position":2,"name":"لوازم دکوری","item":"https://cheshmashdecori.ir/category-decorative"}
+  ]
+}
+</script>
+<style>
+@import url('https://v1.fontapi.ir/css/Vazir');
+:root { --purple: #2c084e; --gold: #d4af37; }
+body {font-family:'Vazir',sans-serif;margin:0;background-color:var(--purple);color:white;}
+header {background:linear-gradient(90deg,var(--purple),var(--gold));padding:15px;display:flex;align-items:center;justify-content:space-between;}
+header img {height:60px;}
+nav a {color:white;margin:0 10px;text-decoration:none;font-weight:bold;}
+nav a:hover {color:var(--gold);}
+.products {display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;padding:20px;}
+.product-card {background:white;color:var(--purple);border:2px solid var(--gold);border-radius:10px;overflow:hidden;text-align:center;box-shadow:0 4px 10px rgba(212,175,55,0.5);transition:transform 0.3s,box-shadow 0.3s;}
+.product-card:hover {transform:translateY(-5px);box-shadow:0 6px 15px rgba(212,175,55,0.8);}
+.product-card img {width:100%;height:200px;object-fit:cover;}
+.product-card button {background:var(--gold);color:var(--purple);border:none;padding:10px 20px;cursor:pointer;font-weight:bold;margin:10px 0;}
+.product-card button:hover {background:var(--purple);color:var(--gold);}
+.social-buttons {display:flex;justify-content:center;gap:15px;padding:20px;}
+.social-btn {display:flex;align-items:center;justify-content:center;width:50px;height:50px;border-radius:50%;background:var(--gold);color:var(--purple);font-size:24px;box-shadow:0 0 10px var(--gold);transition:transform 0.3s,box-shadow 0.3s;}
+.social-btn:hover {transform:scale(1.1);box-shadow:0 0 15px var(--gold);}
+footer {text-align:center;padding:10px;background-color:var(--purple);color:var(--gold);}
+</style>
 </head>
 <body>
-    <h1>لوازم تزئینی دکوراسیون</h1>
-    <p>زیبایی خانه شما با محصولات دکوری خاص و شیک.</p>
-    <nav>
-        <ul>
-            <li><a href="/">صفحه اصلی</a></li>
-            <li><a href="/category-home">لوازم خانه</a></li>
-            <li><a href="/product">محصولات</a></li>
-        </ul>
-    </nav>
+<header>
+  <img src="/static/images/logo.png" alt="CHESHMASH DECORY">
+  <nav>
+    <a href="/">صفحه اصلی</a>
+    <a href="/category-home">لوازم خانه</a>
+    <a href="/category-decorative">لوازم دکوری</a>
+    <a href="/product">محصولات</a>
+  </nav>
+</header>
+<section class="products">
+  <div class="product-card">
+    <img src="https://via.placeholder.com/300x200" alt="تابلو هنری">
+    <h3>تابلو هنری</h3>
+    <button>مشاهده محصول</button>
+  </div>
+  <div class="product-card">
+    <img src="https://via.placeholder.com/300x200" alt="مجسمه طلایی">
+    <h3>مجسمه طلایی</h3>
+    <button>مشاهده محصول</button>
+  </div>
+</section>
+<div class="social-buttons">
+  <a class="social-btn" href="https://wa.me/989927152884" target="_blank">📱</a>
+  <a class="social-btn" href="https://t.me/cheshmashdecori" target="_blank">✈️</a>
+  <a class="social-btn" href="https://instagram.com/cheshmash_decori" target="_blank">📷</a>
+</div>
+<footer>
+  <p>© 2025 CHESHMASH DECORY - همه حقوق محفوظ است.</p>
+</footer>
 </body>
 </html>
