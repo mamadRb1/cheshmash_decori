@@ -1,34 +1,26 @@
-from flask import Flask, render_template, redirect
+from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
+from flask_jwt_extended import JWTManager
+import os
 
 app = Flask(__name__)
 
-# صفحه اصلی
-@app.route("/")
-def home():
-    # قالب اصلی رو اینجا اجرا کن
-    return render_template("index.html")
+# Load config
+app.config.from_object('config')
 
-# مسیرهای اضافی → ریدایرکت دائمی به صفحه اصلی
-@app.route("/product")
-def product():
-    return redirect("/", code=301)
+# Init extensions
+db = SQLAlchemy(app)
+jwt = JWTManager(app)
 
-@app.route("/decorative")
-def decorative():
-    return redirect("/", code=301)
+# Create uploads folder
+os.makedirs('static/uploads', exist_ok=True)
 
-@app.route("/category-home")
-def category_home():
-    return redirect("/", code=301)
+# Import blueprints
+from routes.auth_routes import auth_bp
+from routes.product_routes import product_bp
 
-@app.route("/c")
-def c():
-    return redirect("/", code=301)
+app.register_blueprint(auth_bp, url_prefix='/auth')
+app.register_blueprint(product_bp, url_prefix='/products')
 
-# اگر مسیر ناشناخته‌ای وارد شد
-@app.errorhandler(404)
-def page_not_found(e):
-    return redirect("/", code=301)
-
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000)
