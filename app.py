@@ -1,29 +1,22 @@
-import os
-from flask import Flask, render_template
+from flask import Flask, render_template, send_from_directory
 
 app = Flask(__name__)
 
-# صفحه اصلی
+# مسیر اصلی سایت - صفحه طلایی/بنفش
 @app.route('/')
-def index():
+def home():
     return render_template('index.html')
 
-# دسته‌بندی Home
-@app.route('/category-home')
-def category_home():
-    return render_template('category-home.html')
+# مسیر سرو کردن sitemap.xml
+@app.route('/sitemap.xml')
+def sitemap():
+    return send_from_directory('.', 'sitemap.xml')
 
-# دسته‌بندی دکوراتیو (آینده)
-@app.route('/category-decorative')
-def category_decorative():
-    return render_template('category-decorative.html')
+# اختیاری برای گوگل - سرو robots.txt
+@app.route('/robots.txt')
+def robots():
+    return send_from_directory('.', 'robots.txt')
 
-# صفحه محصول (آینده)
-@app.route('/product')
-def product():
-    return render_template('product.html')
-
-# اجرای برنامه روی پورت Render
-if __name__ == '__main__':
-    port = int(os.environ.get('PORT', 5000))
-    app.run(host='0.0.0.0', port=port)
+if __name__ == "__main__":
+    # اتومات اجرا می‌کنه Render - برای لوکال تست
+    app.run(host='0.0.0.0', port=5000)
