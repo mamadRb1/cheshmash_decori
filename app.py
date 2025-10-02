@@ -1,27 +1,34 @@
-from flask import Flask, render_template, send_from_directory, redirect
+from flask import Flask, render_template, redirect
 
 app = Flask(__name__)
 
-# مسیر اصلی سایت - صفحه طلایی/بنفش
-@app.route('/')
+# صفحه اصلی
+@app.route("/")
 def home():
-    return render_template('index.html')
+    # قالب اصلی رو اینجا اجرا کن
+    return render_template("index.html")
 
-# مسیر /c → ریدایرکت به صفحه اصلی
-@app.route('/c')
-def redirect_c():
-    return redirect('/', code=302)
+# مسیرهای اضافی → ریدایرکت دائمی به صفحه اصلی
+@app.route("/product")
+def product():
+    return redirect("/", code=301)
 
-# مسیر سرو کردن sitemap.xml
-@app.route('/sitemap.xml')
-def sitemap():
-    return send_from_directory('.', 'sitemap.xml')
+@app.route("/decorative")
+def decorative():
+    return redirect("/", code=301)
 
-# اختیاری برای گوگل - سرو robots.txt
-@app.route('/robots.txt')
-def robots():
-    return send_from_directory('.', 'robots.txt')
+@app.route("/category-home")
+def category_home():
+    return redirect("/", code=301)
+
+@app.route("/c")
+def c():
+    return redirect("/", code=301)
+
+# اگر مسیر ناشناخته‌ای وارد شد
+@app.errorhandler(404)
+def page_not_found(e):
+    return redirect("/", code=301)
 
 if __name__ == "__main__":
-    # اتومات اجرا می‌کنه Render - برای لوکال تست
-    app.run(host='0.0.0.0', port=5000)
+    app.run(host="0.0.0.0", port=5000)
