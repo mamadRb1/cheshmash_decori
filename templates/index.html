@@ -3,73 +3,200 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>فروشگاه لوازم دکوری چشماش | خرید آنلاین دکور منزل لوکس</title>
-<meta name="description" content="فروشگاه چشماش دکوری؛ خرید انواع لوازم تزئینی لوکس و کاربردی منزل با رنگ‌بندی طلایی و بنفش، کیفیت عالی و ارسال سریع به سراسر ایران.">
-<meta name="keywords" content="فروشگاه لوازم دکوری لوکس, خرید دکور منزل طلایی بنفش, محصولات تزئینی شیک, فروش لوازم خانه و آشپزخانه, دکور منزل با کیفیت">
-<!-- Schema Organization -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  "name": "CHESHMASH DECORY",
-  "url": "https://cheshmashdecori.ir",
-  "logo": "https://cheshmashdecori.ir/static/images/logo.png",
-  "sameAs": [
-    "https://wa.me/989927152884",
-    "https://t.me/cheshmashdecori",
-    "https://instagram.com/cheshmash_decori"
-  ]
-}
-</script>
+<title>چشمش دکوری | طراحی لوکس طلایی-بنفش</title>
+<meta name="description" content="خرید محصولات دکوراتیو لوکس با طراحی طلایی و بنفش.">
+<meta name="keywords" content="چشمش دکوری, دکوراسیون, طلایی, بنفش, لوکس, محصولات دکوراتیو">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vazir-font@26.0.0/dist/font-face.css">
 <style>
-@import url('https://v1.fontapi.ir/css/Vazir');
-:root { --purple: #2c084e; --gold: #d4af37; }
-body {font-family:'Vazir',sans-serif;margin:0;background-color:var(--purple);color:white;}
-header {background:linear-gradient(90deg,var(--purple),var(--gold));padding:15px;display:flex;align-items:center;justify-content:space-between;}
-header img {height:60px;}
-nav a {color:white;margin:0 10px;text-decoration:none;font-weight:bold;}
-nav a:hover {color:var(--gold);}
-.products {display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;padding:20px;}
-.product-card {background:white;color:var(--purple);border:2px solid var(--gold);border-radius:10px;overflow:hidden;text-align:center;box-shadow:0 4px 10px rgba(212,175,55,0.5);transition:transform 0.3s,box-shadow 0.3s;}
-.product-card:hover {transform:translateY(-5px);box-shadow:0 6px 15px rgba(212,175,55,0.8);}
-.product-card img {width:100%;height:200px;object-fit:cover;}
-.product-card button {background:var(--gold);color:var(--purple);border:none;padding:10px 20px;cursor:pointer;font-weight:bold;margin:10px 0;}
-.product-card button:hover {background:var(--purple);color:var(--gold);}
-.social-buttons {display:flex;justify-content:center;gap:15px;padding:20px;}
-.social-btn {display:flex;align-items:center;justify-content:center;width:50px;height:50px;border-radius:50%;background:var(--gold);color:var(--purple);font-size:24px;box-shadow:0 0 10px var(--gold);transition:transform 0.3s,box-shadow 0.3s;}
-.social-btn:hover {transform:scale(1.1);box-shadow:0 0 15px var(--gold);}
-footer {text-align:center;padding:10px;background-color:var(--purple);color:var(--gold);}
+:root {
+  --gold: #d4af37;
+  --purple: #2c084e;
+}
+body {
+  font-family: Vazir, sans-serif;
+  margin: 0; padding: 0;
+  scroll-behavior: smooth;
+  background: #fff;
+}
+header {
+  background: var(--purple);
+  color: var(--gold);
+  padding: 10px; text-align: center;
+}
+nav ul {
+  list-style: none; padding: 0; margin: 0;
+  display: flex; justify-content: center;
+}
+nav li { margin: 0 10px; }
+nav a { color: var(--gold); text-decoration: none; font-weight: bold; }
+.sidebar {
+  width: 250px; background: #fff;
+  border-right: 3px solid var(--gold);
+  position: fixed; top: 0; bottom: 0;
+  padding: 10px; overflow-y: auto;
+}
+.sidebar h3 {
+  color: var(--purple);
+  border-bottom: 2px solid var(--gold);
+  padding-bottom: 5px;
+}
+.category {
+  cursor: pointer; padding: 8px;
+  border-bottom: 1px solid #eee;
+  display: flex; align-items: center;
+  color: var(--purple);
+}
+.category.active { background: var(--purple); color: var(--gold); }
+.subcategories { display: none; padding-right: 15px; }
+.subcategories a {
+  display: block; padding: 5px 0;
+  color: var(--purple); text-decoration: none;
+}
+section {
+  margin-right: 260px; padding: 20px;
+  background: #fff; border-bottom: 2px solid #ccc;
+}
+section h2 {
+  color: var(--purple);
+}
+.social-buttons {
+  position: fixed; bottom: 20px; left: 20px;
+  display: flex; flex-direction: column;
+}
+.social-buttons a {
+  background: var(--gold); padding: 10px;
+  margin-top: 5px; border-radius: 50%;
+  color: var(--purple); text-align: center;
+  font-size: 20px; text-decoration: none;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+}
+.product-card {
+  border: 2px solid var(--gold);
+  box-shadow: 0 0 10px var(--purple);
+  padding: 10px; margin: 10px; background: #fff;
+}
+.product-card img { max-width: 100%; height: auto; }
+.product-card h3 { color: var(--purple); }
+.product-card button {
+  background: var(--gold); color: var(--purple);
+  border: none; padding: 10px;
+  cursor: pointer; font-weight: bold;
+}
+.product-card button:hover {
+  background: #b8962e;
+}
 </style>
 </head>
 <body>
+
+<!-- منوی بالا -->
 <header>
-  <img src="/static/images/logo.png" alt="CHESHMASH DECORY">
   <nav>
-    <a href="/">صفحه اصلی</a>
-    <a href="/category-home">لوازم خانه</a>
-    <a href="/category-decorative">لوازم دکوری</a>
-    <a href="/product">محصولات</a>
+    <ul>
+      <li><a href="#home">خانه</a></li>
+      <li><a href="#category-home">دسته‌بندی خانه</a></li>
+      <li><a href="#category-decorative">دسته‌بندی دکوراتیو</a></li>
+      <li><a href="#products">محصولات</a></li>
+    </ul>
   </nav>
 </header>
-<section class="products">
+
+<!-- سایدبار دسته‌بندی‌ها -->
+<div class="sidebar">
+  <h3>دسته‌بندی‌ها</h3>
+  <div class="category" data-target="#home">🏠 خانه</div>
+  <div class="category" data-target="#category-home">🛋 دسته‌بندی خانه</div>
+  <div class="subcategories">
+    <a href="#category-home">مبلمان</a>
+    <a href="#category-home">لوستر</a>
+  </div>
+  <div class="category" data-target="#category-decorative">🎨 دکوراتیو</div>
+  <div class="subcategories">
+    <a href="#category-decorative">تابلو</a>
+    <a href="#category-decorative">آینه</a>
+  </div>
+  <div class="category" data-target="#products">🛒 محصولات</div>
+</div>
+
+<!-- سکشن‌ها -->
+
+<section id="home">
+  <h2>خانه</h2>
+  <!-- محتوای صفحه اصلی قبلی -->
+  <p>به چشمش دکوری خوش آمدید! اینجا بهترین محصولات لوکس طلایی-بنفش رو پیدا می‌کنید...</p>
+  <img src="banner-lux.jpg" alt="بنر لوکس">
+</section>
+
+<section id="category-home">
+  <h2>دسته‌بندی خانه</h2>
+  <!-- محتوای category-home.html -->
   <div class="product-card">
-    <img src="https://via.placeholder.com/300x200" alt="محصول ۱">
-    <h3>محصول ۱</h3>
-    <button>مشاهده محصول</button>
+    <img src="sofa.jpg" alt="مبلمان">
+    <h3>مبلمان لوکس</h3>
+    <button>خرید</button>
   </div>
   <div class="product-card">
-    <img src="https://via.placeholder.com/300x200" alt="محصول ۲">
-    <h3>محصول ۲</h3>
-    <button>مشاهده محصول</button>
+    <img src="chandelier.jpg" alt="لوستر">
+    <h3>لوستر طلایی</h3>
+    <button>خرید</button>
   </div>
 </section>
+
+<section id="category-decorative">
+  <h2>دسته‌بندی دکوراتیو</h2>
+  <!-- محتوای category-decorative.html -->
+  <div class="product-card">
+    <img src="mirror.jpg" alt="آینه">
+    <h3>آینه فانتزی</h3>
+    <button>خرید</button>
+  </div>
+  <div class="product-card">
+    <img src="painting.jpg" alt="تابلو">
+    <h3>تابلو هنری</h3>
+    <button>خرید</button>
+  </div>
+</section>
+
+<section id="products">
+  <h2>محصولات</h2>
+  <!-- محتوای product.html -->
+  <div class="product-card">
+    <img src="vase.jpg" alt="گلدان">
+    <h3>گلدان کلاسیک</h3>
+    <button>خرید</button>
+  </div>
+  <div class="product-card">
+    <img src="lamp.jpg" alt="لامپ">
+    <h3>لامپ دکوراتیو</h3>
+    <button>خرید</button>
+  </div>
+</section>
+
+<!-- سوشال شناور -->
 <div class="social-buttons">
-  <a class="social-btn" href="https://wa.me/989927152884" target="_blank">📱</a>
-  <a class="social-btn" href="https://t.me/cheshmashdecori" target="_blank">✈️</a>
-  <a class="social-btn" href="https://instagram.com/cheshmash_decori" target="_blank">📷</a>
+  <a href="https://wa.me/989927152884" title="واتساپ">💬</a>
+  <a href="https://t.me/cheshmashdecori" title="تلگرام">📨</a>
+  <a href="https://instagram.com/cheshmash_decori" title="اینستاگرام">📷</a>
 </div>
-<footer>
-  <p>© 2025 CHESHMASH DECORY - همه حقوق محفوظ است.</p>
-</footer>
+
+<!-- اسکریپت آکاردئون + اسکرول نرم -->
+<script>
+document.querySelectorAll('.category').forEach(cat => {
+  cat.addEventListener('click', () => {
+    document.querySelectorAll('.category').forEach(c => c.classList.remove('active'));
+    cat.classList.add('active');
+    document.querySelectorAll('.subcategories').forEach(sub => sub.style.display = 'none');
+    const nextEl = cat.nextElementSibling;
+    if (nextEl && nextEl.classList.contains('subcategories')) {
+      nextEl.style.display = 'block';
+    }
+    const target = cat.getAttribute('data-target');
+    if (target) {
+      document.querySelector(target).scrollIntoView({ behavior: 'smooth' });
+    }
+  });
+});
+</script>
+
 </body>
 </html>
