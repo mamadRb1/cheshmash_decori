@@ -1,21 +1,75 @@
 <!DOCTYPE html>
 <html lang="fa">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>خرید [نام محصول] | فروشگاه چشماش دکوری</title>
-    <meta name="description" content="مشخصات، عکس و قیمت [نام محصول] با کیفیت اصلی و ارسال سریع به سراسر ایران.">
-    <meta name="keywords" content="خرید [نام محصول] با قیمت مناسب, فروش آنلاین [نام محصول], مشخصات و قیمت [نام محصول], عکس و ویژگی‌های [نام محصول], خرید اینترنتی [نام محصول] اصلی">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>جزئیات محصول | CHESHMASH DECORY</title>
+<meta name="description" content="مشاهده جزئیات کامل محصول لوکس شامل تصاویر، ویژگی‌ها، قیمت و خرید آنلاین.">
+<meta name="keywords" content="جزئیات محصول, خرید محصول لوکس, فروشگاه لوازم دکوری, خرید اینترنتی">
+<!-- Schema Product -->
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"Product",
+  "name":"محصول نمونه",
+  "image":"https://via.placeholder.com/300x200",
+  "description":"محصول نمونه با طراحی طلایی و بنفش، کیفیت عالی و مناسب دکوراسیون منزل.",
+  "brand":{"@type":"Brand","name":"CHESHMASH DECORY"},
+  "offers":{
+    "@type":"Offer",
+    "url":"https://cheshmashdecori.ir/product",
+    "priceCurrency":"IRR",
+    "price":"2500000",
+    "availability":"https://schema.org/InStock"
+  }
+}
+</script>
+<style>
+@import url('https://v1.fontapi.ir/css/Vazir');
+:root { --purple: #2c084e; --gold: #d4af37; }
+body {font-family:'Vazir',sans-serif;margin:0;background-color:var(--purple);color:white;}
+header {background:linear-gradient(90deg,var(--purple),var(--gold));padding:15px;display:flex;align-items:center;justify-content:space-between;}
+header img {height:60px;}
+nav a {color:white;margin:0 10px;text-decoration:none;font-weight:bold;}
+nav a:hover {color:var(--gold);}
+.product-detail {display:flex;flex-wrap:wrap;gap:20px;padding:20px;background:white;color:var(--purple);border-radius:10px;margin:20px;border:2px solid var(--gold);}
+.product-detail img {width:300px;height:auto;border-radius:10px;}
+.product-info {flex:1;}
+.product-info h2 {color:var(--purple);}
+.product-info button {background:var(--gold);color:var(--purple);border:none;padding:10px 20px;cursor:pointer;font-weight:bold;}
+.product-info button:hover {background:var(--purple);color:var(--gold);}
+.social-buttons {display:flex;justify-content:center;gap:15px;padding:20px;}
+.social-btn {display:flex;align-items:center;justify-content:center;width:50px;height:50px;border-radius:50%;background:var(--gold);color:var(--purple);font-size:24px;box-shadow:0 0 10px var(--gold);transition:transform 0.3s,box-shadow 0.3s;}
+.social-btn:hover {transform:scale(1.1);box-shadow:0 0 15px var(--gold);}
+footer {text-align:center;padding:10px;background-color:var(--purple);color:var(--gold);}
+</style>
 </head>
 <body>
-    <h1>[نام محصول]</h1>
-    <p>توضیح کامل درباره [نام محصول] و ویژگی‌ها.</p>
-    <nav>
-        <ul>
-            <li><a href="/">صفحه اصلی</a></li>
-            <li><a href="/category-home">لوازم خانه</a></li>
-            <li><a href="/category-decorative">لوازم دکوری</a></li>
-        </ul>
-    </nav>
+<header>
+  <img src="/static/images/logo.png" alt="CHESHMASH DECORY">
+  <nav>
+    <a href="/">صفحه اصلی</a>
+    <a href="/category-home">لوازم خانه</a>
+    <a href="/category-decorative">لوازم دکوری</a>
+    <a href="/product">محصولات</a>
+  </nav>
+</header>
+<section class="product-detail">
+  <img src="https://via.placeholder.com/300x200" alt="محصول نمونه">
+  <div class="product-info">
+    <h2>محصول نمونه</h2>
+    <p>محصول نمونه با طراحی طلایی–بنفش و کیفیت ممتاز، مناسب دکوراسیون لوکس منزل.</p>
+    <p><strong>قیمت:</strong> ۲,۵۰۰,۰۰۰ ریال</p>
+    <button>افزودن به سبد خرید</button>
+  </div>
+</section>
+<div class="social-buttons">
+  <a class="social-btn" href="https://wa.me/989927152884" target="_blank">📱</a>
+  <a class="social-btn" href="https://t.me/cheshmashdecori" target="_blank">✈️</a>
+  <a class="social-btn" href="https://instagram.com/cheshmash_decori" target="_blank">📷</a>
+</div>
+<footer>
+  <p>© 2025 CHESHMASH DECORY - همه حقوق محفوظ است.</p>
+</footer>
 </body>
 </html>
