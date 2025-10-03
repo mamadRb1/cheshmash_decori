@@ -12,6 +12,11 @@ app.config.from_object('config')
 db = SQLAlchemy(app)
 jwt = JWTManager(app)
 
+# --- موقت برای ساخت جدول ها ---
+with app.app_context():
+    from models import db  # ایمپورت از فایل models.py
+    db.create_all()
+
 # Create uploads folder
 os.makedirs('static/uploads', exist_ok=True)
 
@@ -20,7 +25,7 @@ from routes.auth_routes import auth_bp
 from routes.product_routes import product_bp
 
 app.register_blueprint(auth_bp, url_prefix='/auth')
-app.register_blueprint(product_bp, url_prefix='/products')
+app.register_blueprint(product_bp, url_prefix='/product')
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
