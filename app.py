@@ -1,6 +1,8 @@
-from flask import Flask
+from flask import Flask, send_from_directory
+
 app = Flask(__name__)
 
+# صفحه اصلی
 @app.route('/')
 def home():
     return """
@@ -10,6 +12,12 @@ def home():
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>چشماش دکوری</title>
+        <link rel="manifest" href="/manifest.json">
+        <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/service-worker.js');
+        }
+        </script>
         <link href="https://fonts.googleapis.com/css2?family=Vazir&display=swap" rel="stylesheet">
         <style>
             body {
@@ -44,64 +52,56 @@ def home():
         </style>
     </head>
     <body>
-        <h1>🎉 به چشماش دکوری خوش اومدی 🎉</h1>
-        <p>فروشگاه اکسسوری و دکور با بهترین کیفیت</p>
-        
+        <h1>🎉 خوش اومدی به چشماش دکوری 🎉</h1>
+        <p>بهترین دکورها و اکسسوری‌ها اینجا هست</p>
+
         <!-- دکمه محصولات -->
-        <a class="btn" href="/products">🛍 مشاهده محصولات</a>
+        <a class="btn" href="/products">مشاهده محصولات</a>
 
-        <!-- دکمه واتساپ -->
-        <a class="btn" href="https://wa.me/989927152884" target="_blank">💬 چت در واتساپ</a>
+        <!-- واتساپ -->
+        <a class="btn" href="https://wa.me/09927152884" target="_blank">چت در واتساپ</a>
 
-        <!-- دکمه نصب -->
-        <button class="btn" id="installBtn" style="display:none;">📲 نصب اپ</button>
+        <!-- نصب PWA -->
+        <button class="btn" onclick="installPWA()">📲 نصب اپلیکیشن</button>
 
         <script>
-            let deferredPrompt;
-            window.addEventListener('beforeinstallprompt', (e) => {
-                e.preventDefault();
-                deferredPrompt = e;
-                document.getElementById('installBtn').style.display = 'inline-block';
-            });
+        let deferredPrompt;
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+        });
 
-            document.getElementById('installBtn').addEventListener('click', async () => {
-                if (deferredPrompt) {
-                    deferredPrompt.prompt();
-                    const { outcome } = await deferredPrompt.userChoice;
-                    console.log('Install choice:', outcome);
+        function installPWA() {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                deferredPrompt.userChoice.then((choiceResult) => {
                     deferredPrompt = null;
-                }
-            });
+                });
+            }
+        }
         </script>
     </body>
     </html>
     """
 
+# روت خدمت manifest.json
+@app.route('/manifest.json')
+def manifest():
+    return send_from_directory('.', 'manifest.json')
+
+# روت خدمت service-worker.js
+@app.route('/service-worker.js')
+def sw():
+    return send_from_directory('.', 'service-worker.js')
+
+# مثال مسیر محصولات
 @app.route('/products')
 def products():
-    return """
-    <html lang="fa">
-    <head>
-        <meta charset="UTF-8">
-        <title>محصولات</title>
-        <link href="https://fonts.googleapis.com/css2?family=Vazir&display=swap" rel="stylesheet">
-        <style>
-            body {
-                font-family: 'Vazir', sans-serif;
-                background-color: #2c084e;
-                color: #d4af37;
-                text-align: center;
-                padding: 50px;
-            }
-            h1 {
-                font-size: 2rem;
-            }
-        </style>
-    </head>
-    <body>
-        <h1>🛍 لیست محصولات</h1>
-        <p>اینجا محصولات رو می‌ذاریم...</p>
-        <a href="/" style="color:#d4af37;">⬅ بازگشت</a>
-    </body>
-    </html>
-    """
+    return "<h2>لیست محصولات اینجا میاد...</h2>"
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=5000)
+
+
+
+

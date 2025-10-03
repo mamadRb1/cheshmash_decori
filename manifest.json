@@ -1,11 +1,12 @@
 {
-  "name": "Chesh Mash Decori",
-  "short_name": "چشماش",
-  "description": "فروشگاه محصولات دکوری",
+  "name": "چشماش دکوری",
+  "short_name": "دکوری",
+  "description": "فروشگاه اکسسوری و دکور با بهترین کیفیت",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#F5F5F5",
-  "theme_color": "#6A0DAD",
+  "background_color": "#2c084e",
+  "theme_color": "#d4af37",
+  "orientation": "portrait",
   "icons": [
     {
       "src": "/icons/icon-192x192.png",
@@ -19,3 +20,4 @@
     }
   ]
 }
+
